@@ -66,6 +66,23 @@
             background: linear-gradient(90deg, var(--primary-dark), var(--primary));
         }
         
+        .tab-active {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            color: white;
+        }
+        
+        .tab-inactive {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .comparison-badge {
+            background: #f0f9ff;
+            color: #0E6248;
+            border: 1px solid #0E6248;
+        }
+        
         /* Tamanhos de fonte aumentados */
         h1 {
             font-size: 2.2rem;
@@ -118,23 +135,106 @@
                 <i class="fas fa-chart-line mr-2"></i>Relatório de Performance
             </div>
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-                <span class="header-gradient">Relatório Mensal de Visitantes</span> - Junho 2025
+                <span class="header-gradient">Relatório Comparativo de Visitantes</span>
             </h1>
             <p class="text-gray-600 max-w-2xl mx-auto text-lg">Análise completa do controle de acesso e visitação da empresa</p>
-            <div class="text-base text-gray-500 mt-3 inline-block bg-gray-100 px-5 py-2 rounded-full">
+            
+            <!-- Tabs -->
+            <div class="flex justify-center mt-6 space-x-3">
+                <button id="julyTab" class="tab-active px-6 py-2 rounded-full font-medium transition-all duration-300">
+                    Julho 2025
+                </button>
+                <button id="juneTab" class="tab-inactive px-6 py-2 rounded-full font-medium transition-all duration-300">
+                    Junho 2025
+                </button>
+                <button id="comparisonTab" class="tab-inactive px-6 py-2 rounded-full font-medium transition-all duration-300">
+                    Comparativo
+                </button>
+            </div>
+            
+            <div id="julyPeriod" class="text-base text-gray-500 mt-3 inline-block bg-gray-100 px-5 py-2 rounded-full">
+                <i class="far fa-calendar mr-1"></i> Período: 01/07 a 30/07/2025 | 22 dias com atividade
+            </div>
+            <div id="junePeriod" class="text-base text-gray-500 mt-3 inline-block bg-gray-100 px-5 py-2 rounded-full hidden">
                 <i class="far fa-calendar mr-1"></i> Período: 06/06 a 30/06/2025 | 16 dias com atividade
+            </div>
+            <div id="comparisonPeriod" class="text-base text-gray-500 mt-3 inline-block bg-gray-100 px-5 py-2 rounded-full hidden">
+                <i class="fas fa-exchange-alt mr-1"></i> Comparativo entre Junho e Julho 2025
             </div>
         </div>
 
-        <!-- Cards de Métricas Principais -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <!-- Cards de Métricas Principais - JULHO -->
+        <div id="julyMetrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            <div class="card metric-card border-green-800">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="metric-value font-bold text-gray-800">156</div>
+                        <div class="text-lg text-gray-600 mt-1">Total de Visitantes</div>
+                        <div class="text-sm text-green-800 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1"></i> 30% vs junho
+                        </div>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-full">
+                        <i class="fas fa-users text-green-800 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-green-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="metric-value font-bold text-gray-800">7.1</div>
+                        <div class="text-lg text-gray-600 mt-1">Média por Dia Ativo</div>
+                        <div class="text-sm text-green-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-down mr-1 text-red-500"></i> 5% vs junho
+                        </div>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-full">
+                        <i class="fas fa-chart-line text-green-700 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-orange-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="metric-value font-bold text-gray-800">8</div>
+                        <div class="text-lg text-gray-600 mt-1">Dias de Pico</div>
+                        <div class="text-sm text-orange-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1 text-green-600"></i> 60% vs junho
+                        </div>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-full">
+                        <i class="fas fa-exclamation-circle text-orange-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-purple-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="metric-value font-bold text-gray-800">14</div>
+                        <div class="text-lg text-gray-600 mt-1">Áreas Atendidas</div>
+                        <div class="text-sm text-purple-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1 text-green-600"></i> 27% vs junho
+                        </div>
+                    </div>
+                    <div class="bg-purple-100 p-4 rounded-full">
+                        <i class="fas fa-building text-purple-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards de Métricas Principais - JUNHO (hidden by default) -->
+        <div id="juneMetrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 hidden">
             <div class="card metric-card border-green-800">
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="metric-value font-bold text-gray-800">120</div>
                         <div class="text-lg text-gray-600 mt-1">Total de Visitantes</div>
                         <div class="text-sm text-green-800 mt-2 flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 15% vs mês anterior
+                            <i class="fas fa-arrow-up mr-1"></i> 15% vs maio
                         </div>
                     </div>
                     <div class="bg-green-100 p-4 rounded-full">
@@ -183,64 +283,266 @@
             </div>
         </div>
 
-        <!-- Gráficos Principais -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <!-- Cards de Métricas Comparativas (hidden by default) -->
+        <div id="comparisonMetrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 hidden">
+            <div class="card metric-card border-blue-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-baseline">
+                            <div class="metric-value font-bold text-gray-800">156</div>
+                            <div class="ml-2 text-lg text-gray-500">vs</div>
+                            <div class="ml-2 text-xl font-bold text-gray-600">120</div>
+                        </div>
+                        <div class="text-lg text-gray-600 mt-1">Total de Visitantes</div>
+                        <div class="text-sm text-blue-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1"></i> 30% aumento
+                        </div>
+                    </div>
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <i class="fas fa-users text-blue-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-indigo-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-baseline">
+                            <div class="metric-value font-bold text-gray-800">7.1</div>
+                            <div class="ml-2 text-lg text-gray-500">vs</div>
+                            <div class="ml-2 text-xl font-bold text-gray-600">7.5</div>
+                        </div>
+                        <div class="text-lg text-gray-600 mt-1">Média Diária</div>
+                        <div class="text-sm text-indigo-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-down mr-1 text-red-500"></i> 5% redução
+                        </div>
+                    </div>
+                    <div class="bg-indigo-100 p-4 rounded-full">
+                        <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-amber-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-baseline">
+                            <div class="metric-value font-bold text-gray-800">8</div>
+                            <div class="ml-2 text-lg text-gray-500">vs</div>
+                            <div class="ml-2 text-xl font-bold text-gray-600">5</div>
+                        </div>
+                        <div class="text-lg text-gray-600 mt-1">Dias de Pico</div>
+                        <div class="text-sm text-amber-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1 text-green-600"></i> 60% aumento
+                        </div>
+                    </div>
+                    <div class="bg-amber-100 p-4 rounded-full">
+                        <i class="fas fa-exclamation-circle text-amber-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card metric-card border-violet-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-baseline">
+                            <div class="metric-value font-bold text-gray-800">14</div>
+                            <div class="ml-2 text-lg text-gray-500">vs</div>
+                            <div class="ml-2 text-xl font-bold text-gray-600">11</div>
+                        </div>
+                        <div class="text-lg text-gray-600 mt-1">Áreas Atendidas</div>
+                        <div class="text-sm text-violet-600 mt-2 flex items-center">
+                            <i class="fas fa-arrow-up mr-1 text-green-600"></i> 27% aumento
+                        </div>
+                    </div>
+                    <div class="bg-violet-100 p-4 rounded-full">
+                        <i class="fas fa-building text-violet-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos Principais - JULHO -->
+        <div id="julyCharts" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
             <!-- Distribuição por Tipo -->
             <div class="card p-6">
                 <div class="flex justify-between items-center mb-5">
-                    <h2 class="text-xl font-semibold text-gray-800">Distribuição por Tipo de Visitante</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">Distribuição por Tipo (Julho)</h2>
                     <div class="text-base bg-gray-100 px-3 py-2 rounded-full">
                         <i class="fas fa-percentage mr-1 text-primary"></i>Com percentuais
                     </div>
                 </div>
                 <div class="chart-container">
-                    <canvas id="tipoChart"></canvas>
+                    <canvas id="julyTipoChart"></canvas>
                 </div>
             </div>
 
             <!-- Distribuição por Áreas -->
             <div class="card p-6">
                 <div class="flex justify-between items-center mb-5">
-                    <h2 class="text-xl font-semibold text-gray-800">Visitantes por Área de Negócio</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">Visitantes por Área (Julho)</h2>
                     <div class="text-base bg-gray-100 px-3 py-2 rounded-full">
                         <i class="fas fa-percentage mr-1 text-primary"></i>Com percentuais
                     </div>
                 </div>
                 <div class="chart-container">
-                    <canvas id="areaChart"></canvas>
+                    <canvas id="julyAreaChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Análises Detalhadas -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <!-- Gráficos Principais - JUNHO (hidden by default) -->
+        <div id="juneCharts" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 hidden">
+            <!-- Distribuição por Tipo -->
+            <div class="card p-6">
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl font-semibold text-gray-800">Distribuição por Tipo (Junho)</h2>
+                    <div class="text-base bg-gray-100 px-3 py-2 rounded-full">
+                        <i class="fas fa-percentage mr-1 text-primary"></i>Com percentuais
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="juneTipoChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Distribuição por Áreas -->
+            <div class="card p-6">
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl font-semibold text-gray-800">Visitantes por Área (Junho)</h2>
+                    <div class="text-base bg-gray-100 px-3 py-2 rounded-full">
+                        <i class="fas fa-percentage mr-1 text-primary"></i>Com percentuais
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="juneAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos Comparativos (hidden by default) -->
+        <div id="comparisonCharts" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 hidden">
+            <!-- Comparativo de Tipos -->
+            <div class="card p-6">
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl font-semibold text-gray-800">Comparativo por Tipo</h2>
+                    <div class="text-base comparison-badge px-3 py-2 rounded-full">
+                        <i class="fas fa-exchange-alt mr-1"></i>Junho vs Julho
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="comparisonTipoChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Comparativo de Áreas -->
+            <div class="card p-6">
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl font-semibold text-gray-800">Comparativo por Área</h2>
+                    <div class="text-base comparison-badge px-3 py-2 rounded-full">
+                        <i class="fas fa-exchange-alt mr-1"></i>Junho vs Julho
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="comparisonAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análises Detalhadas - JULHO -->
+        <div id="julyDetails" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
             <!-- Evolução Diária -->
             <div class="card p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-5">Evolução Diária de Visitantes</h2>
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Evolução Diária (Julho)</h2>
                 <div class="chart-container">
-                    <canvas id="dailyChart"></canvas>
+                    <canvas id="julyDailyChart"></canvas>
                 </div>
             </div>
 
-            <!-- Distribuição por Horário -->
+            <!-- Top Responsáveis -->
             <div class="card p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-5">Distribuição por Período do Dia</h2>
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Top Responsáveis (Julho)</h2>
                 <div class="chart-container">
-                    <canvas id="timeChart"></canvas>
+                    <canvas id="julyResponsaveisChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Top Responsáveis -->
-        <div class="card p-6 mb-10">
-            <h2 class="text-xl font-semibold text-gray-800 mb-5">Top Responsáveis por Atendimentos</h2>
-            <div class="chart-container">
-                <canvas id="responsaveisChart"></canvas>
+        <!-- Análises Detalhadas - JUNHO (hidden by default) -->
+        <div id="juneDetails" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 hidden">
+            <!-- Evolução Diária -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Evolução Diária (Junho)</h2>
+                <div class="chart-container">
+                    <canvas id="juneDailyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Responsáveis -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Top Responsáveis (Junho)</h2>
+                <div class="chart-container">
+                    <canvas id="juneResponsaveisChart"></canvas>
+                </div>
             </div>
         </div>
 
-        <!-- Insights Mensais -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <!-- Análises Detalhadas - COMPARATIVO (hidden by default) -->
+        <div id="comparisonDetails" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 hidden">
+            <!-- Comparativo Diário -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Comparativo de Evolução Diária</h2>
+                <div class="chart-container">
+                    <canvas id="comparisonDailyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Comparativo Responsáveis -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Comparativo de Responsáveis</h2>
+                <div class="chart-container">
+                    <canvas id="comparisonResponsaveisChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Mensais - JULHO -->
+        <div id="julyInsights" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            <div class="insight-card bg-green-50 border-green-500">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-xl">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="font-semibold text-green-800 mb-3">📈 Maior Movimento</h3>
+                <p class="text-green-700">Dia 17/07 registrou 10 visitantes - maior pico do mês</p>
+            </div>
+            
+            <div class="insight-card bg-blue-50 border-blue-500">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3 class="font-semibold text-blue-800 mb-3">🎯 Principal Segmento</h3>
+                <p class="text-blue-700">Corretores representam 32% do total de visitantes</p>
+            </div>
+            
+            <div class="insight-card bg-purple-50 border-purple-500">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h3 class="font-semibold text-purple-800 mb-3">🏢 Área Mais Procurada</h3>
+                <p class="text-purple-700">Vendas/Comercial lidera com 38 atendimentos</p>
+            </div>
+
+            <div class="insight-card bg-orange-50 border-orange-500">
+                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-600 text-xl">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="font-semibold text-orange-800 mb-3">⏰ Horário de Pico</h3>
+                <p class="text-orange-700">14:00-16:00 concentra 31% dos atendimentos</p>
+            </div>
+        </div>
+
+        <!-- Insights Mensais - JUNHO (hidden by default) -->
+        <div id="juneInsights" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 hidden">
             <div class="insight-card bg-green-50 border-green-500">
                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-xl">
                     <i class="fas fa-chart-bar"></i>
@@ -273,10 +575,45 @@
                 <p class="text-orange-700">14:00-16:00 concentra 27% dos atendimentos</p>
             </div>
         </div>
+
+        <!-- Insights Comparativos (hidden by default) -->
+        <div id="comparisonInsights" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 hidden">
+            <div class="insight-card bg-blue-50 border-blue-500">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <h3 class="font-semibold text-blue-800 mb-3">📊 Crescimento Total</h3>
+                <p class="text-blue-700">30% mais visitantes em julho (156) vs junho (120)</p>
+            </div>
+            
+            <div class="insight-card bg-purple-50 border-purple-500">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="font-semibold text-purple-800 mb-3">👥 Mudança de Perfil</h3>
+                <p class="text-purple-700">Corretores passaram de 21% para 32% do total</p>
+            </div>
+            
+            <div class="insight-card bg-green-50 border-green-500">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-xl">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="font-semibold text-green-800 mb-3">🏛 Novas Áreas</h3>
+                <p class="text-green-700">3 novos departamentos receberam visitantes em julho</p>
+            </div>
+
+            <div class="insight-card bg-amber-50 border-amber-500">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-amber-600 text-xl">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="font-semibold text-amber-800 mb-3">📅 Dias Ativos</h3>
+                <p class="text-amber-700">38% mais dias com visitantes (22 vs 16 em junho)</p>
+            </div>
+        </div>
         
         <!-- Footer -->
         <div class="text-center text-gray-500 text-base border-t pt-8 mt-8">
-            <p>Relatório gerado em 01/07/2025 às 14:30 | Dashboard de Visitantes v2.1</p>
+            <p>Relatório gerado em 01/08/2025 às 14:30 | Dashboard de Visitantes v2.2</p>
             <p class="mt-2">© 2025 Sistema de Controle de Acesso - Todos os direitos reservados</p>
         </div>
     </div>
@@ -339,9 +676,50 @@
             }
         };
 
-        // Gráfico de tipos de visitante
-        const tipoCtx = document.getElementById('tipoChart').getContext('2d');
-        new Chart(tipoCtx, {
+        // Gráfico de tipos de visitante - JULHO
+        const julyTipoCtx = document.getElementById('julyTipoChart').getContext('2d');
+        new Chart(julyTipoCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Corretor (32%)', 'Parceiro (28%)', 'Cliente (20%)', 'Fornecedor (12%)', 'Candidato (5%)', 'Outros (3%)'],
+                datasets: [{
+                    data: [50, 44, 31, 19, 8, 4],
+                    backgroundColor: colors,
+                    borderWidth: 0
+                }]
+            },
+            options: pieOptions
+        });
+
+        // Gráfico de áreas de negócio - JULHO
+        const julyAreaCtx = document.getElementById('julyAreaChart').getContext('2d');
+        new Chart(julyAreaCtx, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Vendas/Comercial (24%)', 
+                    'Diretoria (18%)', 
+                    'Incorporação (14%)', 
+                    'Suprimentos (12%)', 
+                    'Contabilidade/Controladoria (8%)', 
+                    'Gente e Gestão (6%)', 
+                    'Jurídico (5%)', 
+                    'Relacionamento com o Cliente (5%)', 
+                    'Produtos (4%)', 
+                    'Outros (4%)'
+                ],
+                datasets: [{
+                    data: [38, 28, 22, 19, 12, 9, 8, 8, 6, 6],
+                    backgroundColor: colors,
+                    borderWidth: 0
+                }]
+            },
+            options: pieOptions
+        });
+
+        // Gráfico de tipos de visitante - JUNHO
+        const juneTipoCtx = document.getElementById('juneTipoChart').getContext('2d');
+        new Chart(juneTipoCtx, {
             type: 'doughnut',
             data: {
                 labels: ['Parceiro (29%)', 'Cliente (23%)', 'Corretor (21%)', 'Fornecedor (10%)', 'Candidato (7%)', 'Prestador (2%)', 'Outros (8%)'],
@@ -354,9 +732,9 @@
             options: pieOptions
         });
 
-        // Gráfico de áreas de negócio
-        const areaCtx = document.getElementById('areaChart').getContext('2d');
-        new Chart(areaCtx, {
+        // Gráfico de áreas de negócio - JUNHO
+        const juneAreaCtx = document.getElementById('juneAreaChart').getContext('2d');
+        new Chart(juneAreaCtx, {
             type: 'pie',
             data: {
                 labels: [
@@ -364,7 +742,7 @@
                     'Diretoria (18%)', 
                     'Incorporação (15%)', 
                     'Suprimentos (10%)', 
-                    'Relacionamento (8%)', 
+                    'Relacionamento com o Cliente (8%)', 
                     'Financeiro (7%)', 
                     'Gente e Gestão (6%)', 
                     'Jurídico (5%)', 
@@ -381,9 +759,257 @@
             options: pieOptions
         });
 
-        // Gráfico de evolução diária
-        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
-        new Chart(dailyCtx, {
+        // Gráfico comparativo de tipos
+        const comparisonTipoCtx = document.getElementById('comparisonTipoChart').getContext('2d');
+        new Chart(comparisonTipoCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Corretor', 'Parceiro', 'Cliente', 'Fornecedor', 'Candidato', 'Outros'],
+                datasets: [
+                    {
+                        label: 'Julho 2025',
+                        data: [50, 44, 31, 19, 8, 4],
+                        backgroundColor: '#0E6248',
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'Junho 2025',
+                        data: [25, 35, 28, 12, 8, 12],
+                        backgroundColor: '#3abf98',
+                        borderRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw} visitantes`;
+                            }
+                        },
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value) => value,
+                        color: '#0E6248',
+                        font: {
+                            weight: 'bold',
+                            size: 13
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Gráfico comparativo de áreas
+        const comparisonAreaCtx = document.getElementById('comparisonAreaChart').getContext('2d');
+        new Chart(comparisonAreaCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Vendas/Comercial', 'Diretoria', 'Incorporação', 'Suprimentos', 'Contabilidade', 'Gente e Gestão', 'Jurídico', 'Relacionamento'],
+                datasets: [
+                    {
+                        label: 'Julho 2025',
+                        data: [38, 28, 22, 19, 12, 9, 8, 8],
+                        backgroundColor: '#0E6248',
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'Junho 2025',
+                        data: [25, 22, 18, 12, 0, 7, 6, 10],
+                        backgroundColor: '#3abf98',
+                        borderRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw} visitantes`;
+                            }
+                        },
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value) => value,
+                        color: '#0E6248',
+                        font: {
+                            weight: 'bold',
+                            size: 13
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Gráfico de evolução diária - JULHO
+        const julyDailyCtx = document.getElementById('julyDailyChart').getContext('2d');
+        new Chart(julyDailyCtx, {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '7', '8', '9', '10', '11', '14', '15', '16', '17', '18', '21', '22', '23', '24', '25', '28', '29', '30'],
+                datasets: [{
+                    label: 'Visitantes por dia',
+                    data: [8, 10, 12, 6, 7, 8, 6, 8, 6, 8, 9, 8, 10, 6, 7, 8, 9, 6, 7, 6, 8, 6],
+                    backgroundColor: 'rgba(14, 98, 72, 0.1)',
+                    borderColor: '#0E6248',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Visitantes: ${context.raw}`;
+                            }
+                        },
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    },
+                    datalabels: {
+                        align: 'top',
+                        formatter: (value) => value,
+                        color: '#0E6248',
+                        font: {
+                            weight: 'bold',
+                            size: 13
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            },
+                            stepSize: 2
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Gráfico de evolução diária - JUNHO
+        const juneDailyCtx = document.getElementById('juneDailyChart').getContext('2d');
+        new Chart(juneDailyCtx, {
             type: 'line',
             data: {
                 labels: ['6', '9', '10', '11', '12', '13', '16', '17', '18', '20', '23', '24', '25', '26', '27', '30'],
@@ -463,19 +1089,40 @@
             plugins: [ChartDataLabels]
         });
 
-        // Gráfico de distribuição por horário
-        const timeCtx = document.getElementById('timeChart').getContext('2d');
-        new Chart(timeCtx, {
-            type: 'bar',
+        // Gráfico comparativo diário
+        const comparisonDailyCtx = document.getElementById('comparisonDailyChart').getContext('2d');
+        new Chart(comparisonDailyCtx, {
+            type: 'line',
             data: {
-                labels: ['08:00-10:00 (12%)', '10:00-12:00 (23%)', '12:00-14:00 (21%)', '14:00-16:00 (27%)', '16:00-18:00 (15%)', '18:00-20:00 (2%)'],
-                datasets: [{
-                    label: 'Visitantes',
-                    data: [15, 28, 25, 32, 18, 2],
-                    backgroundColor: '#0E6248',
-                    borderRadius: 8,
-                    borderSkipped: false
-                }]
+                labels: ['1', '2', '3', '4', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+                datasets: [
+                    {
+                        label: 'Julho 2025',
+                        data: [8, 10, 12, 6, null, 7, 8, 6, 8, 6, null, null, 8, 9, 8, 10, 6, null, 7, 8, 9, 6, 7, null, null, 6, 8, 6],
+                        backgroundColor: 'rgba(14, 98, 72, 0.1)',
+                        borderColor: '#0E6248',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: false,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    },
+                    {
+                        label: 'Junho 2025',
+                        data: [null, null, null, null, 2, null, null, 8, 8, 9, 10, 8, null, null, 4, 6, 10, 7, null, null, 12, 8, 8, 7, 8, null, null, 5],
+                        backgroundColor: 'rgba(58, 191, 152, 0.1)',
+                        borderColor: '#3abf98',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: false,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -484,7 +1131,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `Visitantes: ${context.raw}`;
+                                return `${context.dataset.label}: ${context.raw || 0} visitantes`;
                             }
                         },
                         titleFont: {
@@ -495,14 +1142,7 @@
                         }
                     },
                     datalabels: {
-                        anchor: 'end',
-                        align: 'top',
-                        formatter: (value) => value,
-                        color: '#0E6248',
-                        font: {
-                            weight: 'bold',
-                            size: 13
-                        }
+                        display: false
                     },
                     legend: {
                         labels: {
@@ -521,7 +1161,8 @@
                         ticks: {
                             font: {
                                 size: 13
-                            }
+                            },
+                            stepSize: 2
                         }
                     },
                     x: {
@@ -539,9 +1180,86 @@
             plugins: [ChartDataLabels]
         });
 
-        // Gráfico de top responsáveis
-        const respCtx = document.getElementById('responsaveisChart').getContext('2d');
-        new Chart(respCtx, {
+        // Gráfico de top responsáveis - JULHO
+        const julyRespCtx = document.getElementById('julyResponsaveisChart').getContext('2d');
+        new Chart(julyRespCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Joãozinho (18%)', 'THIAGO (15%)', 'Adhemar (12%)', 'Luiz Cruz (8%)', 'Alessandra (7%)', 'Glenda (6%)', 'Talita (5%)'],
+                datasets: [{
+                    label: 'Atendimentos',
+                    data: [28, 23, 19, 12, 11, 9, 8],
+                    backgroundColor: '#002818',
+                    borderRadius: 5,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Atendimentos: ${context.raw}`;
+                            }
+                        },
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        formatter: (value) => value,
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 13
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Gráfico de top responsáveis - JUNHO
+        const juneRespCtx = document.getElementById('juneResponsaveisChart').getContext('2d');
+        new Chart(juneRespCtx, {
             type: 'bar',
             data: {
                 labels: ['THIAGO (15%)', 'Joãozinho (13%)', 'Adhemar (10%)', 'Nayara (8%)', 'DR JOÃO (7%)', 'LUIZ (6%)', 'David (5%)'],
@@ -614,6 +1332,187 @@
                 }
             },
             plugins: [ChartDataLabels]
+        });
+
+        // Gráfico comparativo de responsáveis
+        const comparisonRespCtx = document.getElementById('comparisonResponsaveisChart').getContext('2d');
+        new Chart(comparisonRespCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Joãozinho', 'THIAGO', 'Adhemar', 'Luiz Cruz', 'Alessandra', 'Nayara', 'Glenda', 'DR JOÃO', 'Talita', 'LUIZ', 'David'],
+                datasets: [
+                    {
+                        label: 'Julho 2025',
+                        data: [28, 23, 19, 12, 11, 0, 9, 0, 8, 0, 0],
+                        backgroundColor: '#0E6248',
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'Junho 2025',
+                        data: [15, 18, 12, 0, 0, 10, 0, 8, 0, 7, 6],
+                        backgroundColor: '#3abf98',
+                        borderRadius: 5
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw} atendimentos`;
+                            }
+                        },
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        formatter: (value) => value > 0 ? value : '',
+                        color: '#0E6248',
+                        font: {
+                            weight: 'bold',
+                            size: 13
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Lógica para alternar entre as abas
+        document.getElementById('julyTab').addEventListener('click', function() {
+            // Ativar aba de julho
+            this.classList.remove('tab-inactive');
+            this.classList.add('tab-active');
+            document.getElementById('juneTab').classList.remove('tab-active');
+            document.getElementById('juneTab').classList.add('tab-inactive');
+            document.getElementById('comparisonTab').classList.remove('tab-active');
+            document.getElementById('comparisonTab').classList.add('tab-inactive');
+            
+            // Mostrar conteúdo de julho
+            document.getElementById('julyMetrics').classList.remove('hidden');
+            document.getElementById('juneMetrics').classList.add('hidden');
+            document.getElementById('comparisonMetrics').classList.add('hidden');
+            
+            document.getElementById('julyCharts').classList.remove('hidden');
+            document.getElementById('juneCharts').classList.add('hidden');
+            document.getElementById('comparisonCharts').classList.add('hidden');
+            
+            document.getElementById('julyDetails').classList.remove('hidden');
+            document.getElementById('juneDetails').classList.add('hidden');
+            document.getElementById('comparisonDetails').classList.add('hidden');
+            
+            document.getElementById('julyInsights').classList.remove('hidden');
+            document.getElementById('juneInsights').classList.add('hidden');
+            document.getElementById('comparisonInsights').classList.add('hidden');
+            
+            // Mostrar período correto
+            document.getElementById('julyPeriod').classList.remove('hidden');
+            document.getElementById('junePeriod').classList.add('hidden');
+            document.getElementById('comparisonPeriod').classList.add('hidden');
+        });
+
+        document.getElementById('juneTab').addEventListener('click', function() {
+            // Ativar aba de junho
+            this.classList.remove('tab-inactive');
+            this.classList.add('tab-active');
+            document.getElementById('julyTab').classList.remove('tab-active');
+            document.getElementById('julyTab').classList.add('tab-inactive');
+            document.getElementById('comparisonTab').classList.remove('tab-active');
+            document.getElementById('comparisonTab').classList.add('tab-inactive');
+            
+            // Mostrar conteúdo de junho
+            document.getElementById('julyMetrics').classList.add('hidden');
+            document.getElementById('juneMetrics').classList.remove('hidden');
+            document.getElementById('comparisonMetrics').classList.add('hidden');
+            
+            document.getElementById('julyCharts').classList.add('hidden');
+            document.getElementById('juneCharts').classList.remove('hidden');
+            document.getElementById('comparisonCharts').classList.add('hidden');
+            
+            document.getElementById('julyDetails').classList.add('hidden');
+            document.getElementById('juneDetails').classList.remove('hidden');
+            document.getElementById('comparisonDetails').classList.add('hidden');
+            
+            document.getElementById('julyInsights').classList.add('hidden');
+            document.getElementById('juneInsights').classList.remove('hidden');
+            document.getElementById('comparisonInsights').classList.add('hidden');
+            
+            // Mostrar período correto
+            document.getElementById('julyPeriod').classList.add('hidden');
+            document.getElementById('junePeriod').classList.remove('hidden');
+            document.getElementById('comparisonPeriod').classList.add('hidden');
+        });
+
+        document.getElementById('comparisonTab').addEventListener('click', function() {
+            // Ativar aba de comparação
+            this.classList.remove('tab-inactive');
+            this.classList.add('tab-active');
+            document.getElementById('julyTab').classList.remove('tab-active');
+            document.getElementById('julyTab').classList.add('tab-inactive');
+            document.getElementById('juneTab').classList.remove('tab-active');
+            document.getElementById('juneTab').classList.add('tab-inactive');
+            
+            // Mostrar conteúdo comparativo
+            document.getElementById('julyMetrics').classList.add('hidden');
+            document.getElementById('juneMetrics').classList.add('hidden');
+            document.getElementById('comparisonMetrics').classList.remove('hidden');
+            
+            document.getElementById('julyCharts').classList.add('hidden');
+            document.getElementById('juneCharts').classList.add('hidden');
+            document.getElementById('comparisonCharts').classList.remove('hidden');
+            
+            document.getElementById('julyDetails').classList.add('hidden');
+            document.getElementById('juneDetails').classList.add('hidden');
+            document.getElementById('comparisonDetails').classList.remove('hidden');
+            
+            document.getElementById('julyInsights').classList.add('hidden');
+            document.getElementById('juneInsights').classList.add('hidden');
+            document.getElementById('comparisonInsights').classList.remove('hidden');
+            
+            // Mostrar período correto
+            document.getElementById('julyPeriod').classList.add('hidden');
+            document.getElementById('junePeriod').classList.add('hidden');
+            document.getElementById('comparisonPeriod').classList.remove('hidden');
         });
     </script>
 </body>
